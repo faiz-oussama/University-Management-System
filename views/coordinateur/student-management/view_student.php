@@ -200,7 +200,7 @@ if (isset($_SESSION['user_data'])) {
 
 <?php 
     } else {
-        header("Location: /ENSAHify/error.php");
+        echo "You are not authorized to access this page";
     }
 } else {
     header("Location: index.php?error=UnAuthorized Access");

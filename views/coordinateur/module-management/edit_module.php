@@ -5,11 +5,11 @@ if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
 
         $data = array();
-        $qr = mysqli_query($conn,"SELECT module.*,departement.name as depName,filiere.name as filName
+        $qr = mysqli_query($conn,"SELECT distinct module.*,departement.name as depName,filiere.name as filName
         from module
-        INNER JOIN users ON module.id_filiere = users.id_filiere
+        INNER JOIN users ON module.nom_filiere = users.nom_filiere
         INNER JOIN departement ON departement.id = module.id_dep
-        INNER JOIN filiere ON filiere.id = module.id_filiere
+        INNER JOIN filiere ON filiere.name = module.nom_filiere
         WHERE users.role = 2;
         ");
         while($row = mysqli_fetch_assoc($qr)){

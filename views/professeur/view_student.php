@@ -5,18 +5,12 @@ if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 3) {
 
         $data = array();
-        $id = $_SESSION['user_id'];
-        $qr = mysqli_query($conn,"SELECT distinct affectationmoduleprof.*,module.name as MName,filiere.name as Fname
-        from module
-        INNER JOIN affectationmoduleprof ON module.id= affectationmoduleprof.id_module
-        INNER JOIN filiere ON filiere.name= module.nom_filiere
-        WHERE affectationmoduleprof.id_teacher = $id;
-        ");
+        $qr = mysqli_query($conn,"select * from users where role ='4'");
         while($row = mysqli_fetch_assoc($qr)){
             array_push($data,$row);
         }
     ?>
-
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -50,14 +44,43 @@ if (isset($_SESSION['user_data'])) {
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-sub-header">
-                                    <h3 class="page-title">Professeur</h3>
+                                    <h3 class="page-title">Students</h3>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="students.html">Professeur</a></li>
-                                        <li class="breadcrumb-item active">All Modules</li>
+                                        <li class="breadcrumb-item"><a href="students.html">Student</a></li>
+                                        <li class="breadcrumb-item active">All Students</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                    <?php 
+                            if(isset($_SESSION['message']))  {
+                                foreach ($_SESSION['message'] as $message){
+                                    if($message=="2"){
+                                 ?>
+                                    <div id="toast-container" class="toast-container toast-top-right">
+                                        <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                            <button type="button" class="toast-close-button" role="button">×</button>
+                                            <div class="toast-title">Success!</div>
+                                            <div class="toast-message">Student Edited Successfully</div>
+                                        </div>
+                                    </div>
+                                <?php unset($_SESSION['message']);
+                                    }
+                                    else{
+                                    ?>
+                                        <div id="toast-container" class="toast-container toast-top-right">
+                                            <div class="toast toast-error" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                                <button type="button" class="toast-close-button" role="button">×</button>
+                                                <div class="toast-title">Error!</div>
+                                                <div class="toast-message">Error while Editing the student</div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                        } unset($_SESSION['message']);
+                                        }}
+                                ?>
                     </div>
                     <div class="student-group-form">
                         <div class="row">
@@ -69,6 +92,11 @@ if (isset($_SESSION['user_data'])) {
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Search by Name ...">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search by Phone ...">
                                 </div>
                             </div>
                             <div class="col-lg-2">
@@ -86,7 +114,7 @@ if (isset($_SESSION['user_data'])) {
                                     <div class="page-header">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <h3 class="page-title">Modules</h3>
+                                                <h3 class="page-title">Students</h3>
                                             </div>
                                             <div class="col-auto text-end float-end ms-auto download-grp">
                                                 <a href="/ENSAHify/controllers/DownloadCsv.php" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
@@ -105,7 +133,12 @@ if (isset($_SESSION['user_data'])) {
                                                     </th>
                                                     <th>ID</th>
                                                     <th>Name</th>
-                                                    <th>Section</th>
+                                                    <th>CNE</th>
+                                                    <th>Sector</th>
+                                                    <th>Niveau</th>
+                                                    <th>Gender</th>
+                                                    <th>Mobile Number</th>
+                                                    <th>Email</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -119,8 +152,18 @@ if (isset($_SESSION['user_data'])) {
                                                         </div>
                                                     </td>
                                                     <td><?php echo $d['id'] ?></td>
-                                                    <td><?php echo $d['MName']?></td> 
-                                                    <td><?php echo $d['Fname'] ?></td>  
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="/ENSAHify/public/assets/img/profiles/avatar-01.jpg" alt="User Image"></a>
+                                                            <a href="student-details.html"><?php echo ucfirst($d['nom'])." ".ucfirst($d['prénom']) ?></a>
+                                                        </h2>
+                                                    </td>
+                                                    <td><?php echo $d['CNE'] ?></td>
+                                                    <td><?php echo $d['nom_filiere'] ?></td>
+                                                    <td><?php echo $d['niveau'] ?></td>
+                                                    <td><?php echo $d['genre'] ?></td> 
+                                                    <td><?php echo $d['phone'] ?></td>
+                                                    <td><?php echo $d['email'] ?></td>          
                                                 </tr>
                                                 <?php } ?>   
                                             </tbody>
@@ -159,7 +202,7 @@ if (isset($_SESSION['user_data'])) {
 
 <?php 
     } else {
-        header("Location: /ENSAHify/error.php");
+        echo "You are not authorized to access this page";
     }
 } else {
     header("Location: index.php?error=UnAuthorized Access");

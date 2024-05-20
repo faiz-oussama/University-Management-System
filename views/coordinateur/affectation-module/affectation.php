@@ -3,11 +3,11 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
-        $id = $_SESSION['fil_id'];
+        $fil_nom = $_SESSION['fil_nom'];
         $dep = $_SESSION['dep_id'];
 
         $qr = mysqli_query($conn,"SELECT * FROM users WHERE (role = 3 and id_dep ='$dep')");
-        $qr2 = mysqli_query($conn,"SELECT id,name FROM module WHERE id_filiere ='$id'");
+        $qr2 = mysqli_query($conn,"SELECT id,name FROM module WHERE nom_filiere ='$fil_nom'");
     ?>
 
     <!DOCTYPE html>

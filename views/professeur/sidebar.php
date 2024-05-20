@@ -7,13 +7,13 @@
                     <span>Main Menu</span>
                 </li>
                 <li>
-                    <a href="/ENSAHify/views/coordinateur/home.php"><i class="fas fa-home"></i><span> Home</span></a>
+                    <a href="/ENSAHify/views/professeur/home.php"><i class="fas fa-home"></i><span> Home</span></a>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-graduation-cap"></i> <span> Students</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="/ENSAHify/views/coordinateur/student-management/view_student.php">Student List</a></li>
+                        <li><a href="/ENSAHify/views/professeur/view_student.php">Student List</a></li>
                     </ul>
                 </li>
 
@@ -33,10 +33,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-calendar-day"></i> <span> Times Table</span></a>
+                    <a href="/ENSAHify/views/professeur/timetable.php"><i class="fas fa-calendar-day"></i> <span> Times Table</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-address-card"></i><span> Profile</span></a>
+                    <a href="/ENSAHify/views/professeur/profile.php"><i class="fas fa-address-card"></i><span> Profile</span></a>
                 </li>
             </ul>
         </div>

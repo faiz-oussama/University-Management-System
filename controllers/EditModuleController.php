@@ -11,6 +11,8 @@ if (isset($_SESSION['user_data'])) {
             //get data
 
             $nom = $data['name'];
+            $niv = $data['niveau'];
+            $sem = $data['semestre'];
         }
     ?>
  
@@ -52,7 +54,7 @@ if (isset($_SESSION['user_data'])) {
                         <div class="col-sm-12">
                             <div class="card comman-shadow">
                                 <div class="card-body">
-                                    <form action="/ENSAHify/controllers/AddModuleController.php?<?php echo 'id=update';?>" method="post">
+                                    <form action="/ENSAHify/controllers/AddModuleController.php?id=<?php echo $id;?>" method="post">
                                         <div class="row">
                                             <div class="col-12">
                                                 <h5 class="form-title student-info">Module Information <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
@@ -62,6 +64,18 @@ if (isset($_SESSION['user_data'])) {
                                                 <div class="form-group local-forms">
                                                     <label>Name <span class="login-danger">*</span></label>
                                                     <input class="form-control" type="text" name="name" value="<?php echo $nom;?>" required="required" placeholder="Enter Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-group local-forms">
+                                                    <label>Niveau <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="niveau" value="<?php echo $niv;?>" required="required" placeholder="Enter level">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-group local-forms">
+                                                    <label>Semestre <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="semestre" value="<?php echo $sem;?>" required="required" placeholder="Enter semestre">
                                                 </div>
                                             </div>
                                             <div class="col-12">

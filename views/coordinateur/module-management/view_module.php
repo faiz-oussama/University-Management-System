@@ -5,11 +5,11 @@ if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
 
         $data = array();
-        $qr = mysqli_query($conn,"SELECT module.*,departement.name as depName,filiere.name as filName
+        $qr = mysqli_query($conn,"SELECT distinct module.*,departement.name as depName,filiere.name as filName
         from module
-        INNER JOIN users ON module.id_filiere = users.id_filiere
+        INNER JOIN users ON module.nom_filiere = users.nom_filiere
         INNER JOIN departement ON departement.id = module.id_dep
-        INNER JOIN filiere ON filiere.id = module.id_filiere
+        INNER JOIN filiere ON filiere.name = module.nom_filiere
         WHERE users.role = 2;
         ");
         while($row = mysqli_fetch_assoc($qr)){
@@ -62,8 +62,8 @@ if (isset($_SESSION['user_data'])) {
                     <div>
                     <?php 
                             if(isset($_SESSION['message']))  {
-                                foreach ($_SESSION['message'] as $message){
-                                    if($message=="2"){
+                                     $message =$_SESSION['message'];
+                                    if($message=="1"){
                                  ?>
                                     <div id="toast-container" class="toast-container toast-top-right">
                                         <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
@@ -72,7 +72,7 @@ if (isset($_SESSION['user_data'])) {
                                             <div class="toast-message">Module Added Successfully</div>
                                         </div>
                                     </div>
-                                <?php unset($_SESSION['message']);
+                                <?php
                                     }
                                     else{
                                     ?>
@@ -85,7 +85,7 @@ if (isset($_SESSION['user_data'])) {
                                         </div>
                                     <?php
                                         } unset($_SESSION['message']);
-                                        }}
+                                        }
                                 ?>
                     </div>
                     <div class="student-group-form">
@@ -140,6 +140,8 @@ if (isset($_SESSION['user_data'])) {
                                                     <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Section</th>
+                                                    <th>Niveau</th>
+                                                    <th>Semestre</th>
                                                     <th>Departement</th>
                                                 </tr>
                                             </thead>
@@ -156,6 +158,8 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['id'] ?></td>
                                                     <td><?php echo $d['name'] ?></td>
                                                     <td><?php echo $d['filName'] ?></td>
+                                                    <td><?php echo $d['niveau'] ?></td>
+                                                    <td><?php echo $d['semestre'] ?></td>
                                                     <td><?php echo $d['depName'] ?></td>     
                                                 </tr>
                                                 <?php } ?>   

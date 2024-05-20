@@ -4,34 +4,38 @@ include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
         if(isset($_GET['id'])){
-            $id = $_POST['id'];
+            $id = $_GET['id'];
             $name = mysqli_real_escape_string($conn,$_REQUEST['name']);
-            $id_filiere = $_SESSION['fil_id'];
+            $nom_filiere = $_SESSION['fil_nom'];
             $id_dep = $_SESSION['dep_id'];
+            $niveau = mysqli_real_escape_string($conn,$_REQUEST['niveau']);
+            $semestre = mysqli_real_escape_string($conn,$_REQUEST['semestre']);
 
             $qr = mysqli_query($conn,"UPDATE module set
-                name = '$name' where id='$id'");
+                name = '$name',niveau = '$niveau',semestre = '$semestre' where id='$id'");
                 if ($qr) {
-                    $_SESSION['message'][] = "2";
+                    $_SESSION['message']= "1";
                     header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
                 } else {
-                    $_SESSION['message'][] = "3";
+                    $_SESSION['message'] = "0";
                     header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
                 }
             }
         else{
-        $id_filiere = $_SESSION['fil_id'];
+        $nom_filiere = $_SESSION['fil_nom'];
         $id_dep = $_SESSION['dep_id'];
         $name = mysqli_real_escape_string($conn,$_REQUEST['name']);
+        $niveau = mysqli_real_escape_string($conn,$_REQUEST['niveau']);
+        $semestre = mysqli_real_escape_string($conn,$_REQUEST['semestre']);
 
         $qr = mysqli_query($conn,"INSERT into module (
-           name,id_filiere,id_dep) values (
-            '".$name."','".$id_filiere."','".$id_dep."')");
+           name,nom_filiere,niveau,semestre,id_dep) values (
+            '".$name."','".$nom_filiere."','".$niveau."','".$semestre."','".$id_dep."')");
             if ($qr) {
-                $_SESSION['message'][] = "1";
+                $_SESSION['message'] = "1";
                 header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
             } else {
-                $_SESSION['message'][] = "0";
+                $_SESSION['message'] = "0";
                 header("Location: /ENSAHify/views/coordinateur/module-management/view_module.php");
             }
         }

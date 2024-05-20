@@ -63,8 +63,14 @@ if (isset($_SESSION['user_data'])) {
                                             </div>
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-group local-forms">
-                                                    <label>Description <span class="login-danger">*</span></label>
-                                                    <input class="form-control" type="text" required="required" placeholder="Enter Module Description">
+                                                    <label>Niveau <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="niveau" type="text" required="required" placeholder="Enter Module Description">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-group local-forms">
+                                                    <label>Semestre <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="semestre" type="text" required="required" placeholder="Enter Module Description">
                                                 </div>
                                             </div>
                                            <div class="col-12">
