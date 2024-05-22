@@ -52,9 +52,8 @@
                     <a href="#"><i class="fas fa-clipboard"></i> <span> Grades</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="invoices.html">Session Automne</a></li>
-                        <li><a href="invoice-grid.html">Session Printemps</a></li>
-                        <li><a href="#"><i class="fa fa-archive"></i><span> Archive</span></a></li>
+                        <li><a href="/ENSAHify/views/coordinateur/notes/firstpage.php">Grades list</a></li>
+                        <li><a href="#"><i class="fa fa-archive"></i><span>Grades archive</span></a></li>
                     </ul>
                 </li>
                 <li>

@@ -3,14 +3,13 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 3) {
+    if ($_SESSION['user_data']['role'] == 2) {
         $id_module = $_GET['id'];
-        $id = $_SESSION['user_id'];
         $data = array();
-        $qr = mysqli_query($conn, "SELECT DISTINCT u.*, n.value AS grade,n.valideProf
-                                   FROM users u
-                                   LEFT JOIN notes n ON u.CNE = n.cne AND n.id_module = '$id_module'
-                                   WHERE u.role = '4'");
+        $qr = mysqli_query($conn, "SELECT n.*
+                                   FROM notes n
+                                   WHERE n.id_module = '$id_module'
+                                   and n.valideProf = 1");
         while ($row = mysqli_fetch_assoc($qr)) {
             array_push($data, $row);
         }
@@ -32,7 +31,14 @@ if (isset($_SESSION['user_data'])) {
     <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="/ENSAHify/public/assets/plugins//toastr/toatr.css">
     <link rel="stylesheet" href="/ENSAHify/public/assets/css/style.css">
+    <style>
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        </style>
 </head>
 
 <body>
@@ -53,20 +59,31 @@ if (isset($_SESSION['user_data'])) {
                     </div>
                 </div>
                 <div>
-                    <?php
-                    if (isset($_SESSION['message'])) {
-                        foreach ($_SESSION['message'] as $message) {
+                <?php 
+                            if(isset($_SESSION['message']))  {
+                                $message=$_SESSION['message'] ;
+                                    if($message=="1"){
+                                 ?>
+                                    <div id="toast-container" class="toast-container toast-top-right">
+                                        <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                            <button type="button" class="toast-close-button" role="button">×</button>
+                                            <div class="toast-title">Success!</div>
+                                            <div class="toast-message">Grades validated Successfully</div>
+                                        </div>
+                                    </div>
+                    <?php  unset($_SESSION['message']);
+                                    }
+                            else{
                     ?>
                             <div id="toast-container" class="toast-container toast-top-right">
-                                <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                <div class="toast toast-error" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
                                     <button type="button" class="toast-close-button" role="button">×</button>
-                                    <div class="toast-title">Success!</div>
-                                    <div class="toast-message"><?php echo $message; ?></div>
+                                    <div class="toast-title">Error!</div>
+                                    <div class="toast-message">Error while validating the grades</div>
                                 </div>
                             </div>
                     <?php
-                            unset($_SESSION['message']);
-                        }
+                         unset($_SESSION['message']);}
                     }
                     ?>
                 </div>  
@@ -84,7 +101,7 @@ if (isset($_SESSION['user_data'])) {
                             </div>
                         </div>
                     </div>
-                <form method="POST" action="/ENSAHify/views/professeur/save_note.php"  onsubmit="return validateForm(event)" >
+                <form method="POST" action="/ENSAHify/views/coordinateur/notes/valideNotes.php"  onsubmit="return validateForm(event)" >
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-table comman-shadow">
@@ -114,10 +131,17 @@ if (isset($_SESSION['user_data'])) {
                                             <tbody>
                                                 <?php
                                                 foreach ($data as $d) {
-                                                    $CNE = $d['CNE'];
-                                                    $grade = isset($d['grade']) ? $d['grade'] : '';
-                                                    $valideProf = $d['valideProf'];
-                                                ?>
+                                                    $code = [];
+                                                    $CNE = $d['cne'];
+                                                    $grade = $d['value'];
+                                                    $qr2 = mysqli_query($conn, "SELECT u.*,n.cne
+                                                    FROM users u
+                                                    JOIN notes n ON u.CNE = n.cne
+                                                    WHERE u.CNE = '$CNE';");
+                                                    while ($row = mysqli_fetch_assoc($qr2)) {
+                                                        array_push($code, $row);
+                                                    }
+                                                ?> 
                                                     <tr>
                                                         <td>
                                                             <div class="form-check check-tables">
@@ -126,15 +150,14 @@ if (isset($_SESSION['user_data'])) {
                                                         </td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="student-details.html"><?php echo ucfirst($d['nom']) . " " . ucfirst($d['prénom']) ?></a>
+                                                                <a href="student-details.html"><?php echo ucfirst($code[0]['nom']) . " " . ucfirst($code[0]['prénom']) ?></a>
                                                             </h2>
                                                         </td>
                                                         <input type="hidden" name = "cne" value="<?php echo $CNE?>">
                                                         <input type="hidden" name = "module" value="<?php echo $id_module?>">
                                                         <td><?php echo $CNE ?></td>
                                                         <td>
-                                                            <input class="form-control" style="width:170px;border-radius:20px;" name="grades[<?php echo $CNE; ?>]" type="number" step="0.5" min="0" max="20" placeholder="Enter Moyenne" value="<?php echo $grade; ?>" <?php echo $valideProf==1 ? 'readonly' : ''; ?>>
-                                                            <span class="error-message" style="color: red; display: none;">Please enter a grade.</span>
+                                                            <input class="form-control" style="width:170px;border-radius:20px;" name="grades[<?php echo $CNE; ?>]" type="number" step="0.5" min="0" max="20" placeholder="Enter Moyenne" value="<?php echo $grade; ?>" readonly>
                                                         </td>
                                                         <td>
                                                             <div id="status-<?php echo $CNE; ?>" style="margin-top: 5px;">
@@ -157,8 +180,7 @@ if (isset($_SESSION['user_data'])) {
                         </div>
                     </div>
                     <div class="buttons" style="margin-right:40px;display:flex;justify-content:right;align-items:center;flex-direction:row;">
-                        <button type="submit" <?php echo $valideProf== 1 ? "hidden" : "";?> value = "1" name="valider" class="btn btn-block btn-outline-success active" style="margin-bottom:20px;width:100px;margin-right:8px">Valider</button>
-                        <button type="submit" <?php echo $valideProf== 1 ? "hidden" : "";?> value = "0" name="sauvegarder" class="btn btn-block btn-outline-secondary active" style="margin-bottom:20px;width:120px;">Sauvegarder</button>
+                        <button type="submit" value = "1" name="validerCoord" class="btn btn-block btn-outline-success active" style="margin-bottom:20px;width:100px;margin-right:8px">Valider</button>
                     </div>
                 </form>
             </div>
@@ -166,7 +188,7 @@ if (isset($_SESSION['user_data'])) {
 
         <?php
         include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/header.php');
-        include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/professeur/sidebar.php');
+        include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/coordinateur/sidebar.php');
         ?>
         <script src="/ENSAHify/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/ENSAHify/public/assets/js/jquery-3.6.0.min.js"></script>
@@ -181,6 +203,8 @@ if (isset($_SESSION['user_data'])) {
         <script src="/ENSAHify/public/assets/js/script.js"></script>
         <script src="/ENSAHify/public/assets/plugins/apexchart/apexcharts.min.js"></script>
         <script src="/ENSAHify/public/assets/plugins/apexchart/chart-dat.js"></script>
+        <script src="/ENSAHify/public/assets/plugins/toastr/toastr.min.js"></script>
+        <script src="/ENSAHify/public/assets/plugins/toastr/toastr.js"></script>
         <script src="/ENSAHify/public/assets/js/calander.js"></script>
         <script src="/ENSAHify/public/assets/plugins/script.js"></script>                                                        
         <script>
