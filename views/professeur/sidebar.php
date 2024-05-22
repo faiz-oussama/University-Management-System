@@ -24,13 +24,8 @@
                         <li><a href="/ENSAHify/views/professeur/module-view.php">Modules List</a></li>
                     </ul>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-clipboard"></i> <span> Grades</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="invoices.html">Session Automne</a></li>
-                        <li><a href="invoice-grid.html">Session Printemps</a></li>
-                    </ul>
+                <li>
+                    <a href="/ENSAHify/views/professeur/choixModuleNotes.php"><i class="fas fa-clipboard"></i> <span> Grades</span></a>
                 </li>
                 <li>
                     <a href="/ENSAHify/views/professeur/timetable.php"><i class="fas fa-calendar-day"></i> <span> Times Table</span></a>
