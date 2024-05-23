@@ -2,30 +2,40 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['validerCoord']) && isset($_POST['cne']) && isset($_POST['module'])) {
-        $cne_list = $_POST['cne'];
-        $id_module = $_POST['module'];
-        $grades = $_POST['grades'];
-
-        foreach ($cne_list as $cne) {
-            $grade = isset($grades[$cne]) ? $grades[$cne] : null;
-
-            // Update the database record
-            $update_query = "UPDATE notes SET valideCoord = 1 WHERE cne = '$cne' AND id_module = '$id_module'";
-            mysqli_query($conn, $update_query);
-        }
-
-        $_SESSION['message'][] = "All grades have been successfully validated.";
-    } else {
-        $_SESSION['message'][] = "Error: Missing required data.";
-    }
-
-    // Redirect back to the previous page or to a success page
-    header("Location: /ENSAHify/views/coordinateur/grades_page.php?id=$id_module");
-    exit;
-} else {
-    header("Location: /ENSAHify/index.php?error=UnAuthorized Access");
-    exit;
+if (isset($_SESSION['user_data'])) {
+    if ($_SESSION['user_data']['role'] == 3) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['grades'])) {
+            $id = $_SESSION['user_id'];
+            $id_module = $_POST['module'];
+            $CNE = $_POST['cne'];
+            $is_sauvegarder = isset($_POST['sauvegarder']);
+            $grades = $_POST['grades'];
+            $valideProf = $_POST['valider'];
+            foreach ($grades as $CNE => $grade) {
+                if ($is_sauvegarder && $grade === '') {
+                    // Skip saving this grade because it is empty
+                    continue;
+                }
+                $grade = $grade !== '' ? floatval($grade) : null;
+            
+                $query = "INSERT INTO notes (id_teacher, cne, id_module, value, valideProf) VALUES ('$id', '$CNE', '$id_module', ";
+                
+                // Check if $grade is NULL or not
+                if ($grade !== null) {
+                    // If $grade is not NULL, include the grade value in the query
+                    $query .= "'$grade', ";
+                } else {
+                    // If $grade is NULL, include NULL in the query
+                    $query .= "NULL, ";
+                }
+                
+                // Include valideProf value in the query
+                $query .= "'$valideProf') ON DUPLICATE KEY UPDATE value = VALUES(value), valideProf = VALUES(valideProf)";
+                
+                mysqli_query($conn, $query);
+            }
+            header("Location: /ENSAHify/views/professeur/formNotes.php?id=$id_module"); // Redirect to avoid form resubmission on refresh
+            exit();
+}}
 }
 ?>

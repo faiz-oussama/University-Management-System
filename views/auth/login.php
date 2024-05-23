@@ -13,6 +13,8 @@ if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['p
         $dep_id = $data['id_dep'];
         $fil_nom = $data['nom_filiere'];
         $user_id = $data['id'];
+        $niveau = $data['niveau'];
+        $cne = $data['CNE'];
         $role_query = mysqli_query($conn, "SELECT role FROM roles WHERE id = '$role_id'");
         $role_data = mysqli_fetch_assoc($role_query);
         $data['role_name'] = $role_data['role'];
@@ -20,6 +22,8 @@ if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['p
         $_SESSION['dep_id'] = $dep_id;
         $_SESSION['fil_nom'] = $fil_nom;
         $_SESSION['user_id'] = $user_id;
+        $_SESSION['niveau'] = $niveau;
+        $_SESSION['cne'] = $cne;
         if($data['role'] == 2)
         {
             header("Location:../../views/coordinateur/home.php");
@@ -28,6 +32,11 @@ if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['p
         else if($data['role'] == 3)
         {
             header("Location:../../views/professeur/home.php");
+            exit();
+        }
+        else if($data['role'] == 4)
+        {
+            header("Location:../../views/student/home.php");
             exit();
         }
         
