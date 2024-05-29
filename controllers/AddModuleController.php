@@ -2,7 +2,7 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 2) {
+    if ($_SESSION['user_data']['role'] == 1) {
         if(isset($_GET['id'])){
             $id = $_GET['id'];
             $name = mysqli_real_escape_string($conn,$_REQUEST['name']);
@@ -15,10 +15,10 @@ if (isset($_SESSION['user_data'])) {
                 name = '$name',niveau = '$niveau',semestre = '$semestre' where id='$id'");
                 if ($qr) {
                     $_SESSION['message']= "1";
-                    header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
+                    header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");
                 } else {
                     $_SESSION['message'] = "0";
-                    header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
+                    header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");
                 }
             }
         else{
@@ -33,10 +33,10 @@ if (isset($_SESSION['user_data'])) {
             '".$name."','".$nom_filiere."','".$niveau."','".$semestre."','".$id_dep."')");
             if ($qr) {
                 $_SESSION['message'] = "1";
-                header("Location:/ENSAHify/views/coordinateur/module-management/view_module.php");
+                header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");
             } else {
                 $_SESSION['message'] = "0";
-                header("Location: /ENSAHify/views/coordinateur/module-management/view_module.php");
+                header("Location: /ENSAHify/views/chef_dep/module-management/view_module.php");
             }
         }
 ?>

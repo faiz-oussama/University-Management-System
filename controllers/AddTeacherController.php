@@ -2,7 +2,7 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 2) {
+    if ($_SESSION['user_data']['role'] == 1) {
         if(isset($_GET['id'])){
             $id = $_POST['id'];
             $prénom = mysqli_real_escape_string($conn,$_REQUEST['prénom']);
@@ -16,10 +16,10 @@ if (isset($_SESSION['user_data'])) {
                 prénom = '$prénom',nom='$nom',role='$role',email = '$email',CNI ='$cni',phone='$phone' where id='$id'");
                 if ($qr) {
                     $_SESSION['message'][] = "2";
-                    header("Location:/ENSAHify/views/coordinateur/teacher-management/view_teacher.php");
+                    header("Location:/ENSAHify/views/chef_dep/teacher-management/view_teacher.php");
                 } else {
                     $_SESSION['message'][] = "3";
-                    header("Location: /ENSAHify/views/coordinateur/teacher-management/view_teacher.php");
+                    header("Location: /ENSAHify/views/chef_dep/teacher-management/view_teacher.php");
                 }
             }
         else{
@@ -40,10 +40,10 @@ if (isset($_SESSION['user_data'])) {
             '".$prénom."','".$nom."','".$genre."','".$sqlDateOfBirth."','".$email."','".$cni."','".md5($cni)."',".$role.",'".$phone."','".$dep."','".date('Y-m-d H:i:s')."')");
             if ($qr) {
                 $_SESSION['message'][] = "1";
-                header("Location:/ENSAHify/views/coordinateur/teacher-management/add_teacher.php");
+                header("Location:/ENSAHify/views/chef_dep/teacher-management/add_teacher.php");
             } else {
                 $_SESSION['message'][] = "0";
-                header("Location: /ENSAHify/views/coordinateur/teacher-management/add_teacher.php");
+                header("Location: /ENSAHify/views/chef_dep/teacher-management/add_teacher.php");
             }
         }
 ?>

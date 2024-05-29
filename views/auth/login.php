@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../Database.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 
 if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['password']) && !empty($_REQUEST['password'])){
     $email = mysqli_real_escape_string($conn,$_REQUEST['email']);
@@ -27,17 +27,22 @@ if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['p
         $_SESSION['role_name'] =  $data['role_name'];
         if($data['role'] == 2)
         {
-            header("Location:../../views/coordinateur/home.php");
+            header("Location: /ENSAHify/views/coordinateur/home.php");
             exit();
         }
         else if($data['role'] == 3)
         {
-            header("Location:../../views/professeur/home.php");
+            header("Location: /ENSAHify/views/professeur/home.php");
             exit();
         }
         else if($data['role'] == 4)
         {
-            header("Location:../../views/student/home.php");
+            header("Location: /ENSAHify/views/student/home.php");
+            exit();
+        }
+        else if($data['role'] == 1)
+        {
+            header("Location: /ENSAHify/views/chef_dep/home.php");
             exit();
         }
         

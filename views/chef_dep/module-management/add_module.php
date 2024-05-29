@@ -1,19 +1,7 @@
 <?php
 session_start();
-include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
-        if(isset($_GET['updateid'])){
-            $id = $_GET['updateid'];
-            $qr = mysqli_query($conn,"SELECT * from module where id ='$id'");
-            $data = mysqli_fetch_assoc($qr);
-
-            //get data
-
-            $nom = $data['name'];
-            $niv = $data['niveau'];
-            $sem = $data['semestre'];
-        }
     ?>
  
     <!DOCTYPE html>
@@ -31,7 +19,14 @@ if (isset($_SESSION['user_data'])) {
         <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="/ENSAHify/public/assets/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="/ENSAHify/public/assets/plugins//toastr/toatr.css">
         <link rel="stylesheet" href="/ENSAHify/public/assets/css/style.css">
+        <style>
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        </style>
     </head>
     <body>
         <div class="main-wrapper">
@@ -41,50 +36,77 @@ if (isset($_SESSION['user_data'])) {
                         <div class="row align-items-center">
                             <div class="col-sm-12">
                                 <div class="page-sub-header">
-                                    <h3 class="page-title">Edit Module</h3>
+                                    <h3 class="page-title">Add Module</h3>
                                         <ul class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Coordinator</a></li>
-                                            <li class="breadcrumb-item active">Edit Module</li>
+                                            <li class="breadcrumb-item"><a href="students.html">Module</a></li>
+                                            <li class="breadcrumb-item active">Add Module</li>
                                         </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card comman-shadow">
                                 <div class="card-body">
-                                    <form action="/ENSAHify/controllers/AddModuleController.php?id=<?php echo $id;?>" method="post">
+                                    <form action="/ENSAHify/controllers/AddModuleController.php" method="post">
                                         <div class="row">
                                             <div class="col-12">
                                                 <h5 class="form-title student-info">Module Information <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
                                             </div>
-                                            <input type="hidden" name="id" value="<?php echo $id?>">
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-group local-forms">
-                                                    <label>Name <span class="login-danger">*</span></label>
-                                                    <input class="form-control" type="text" name="name" value="<?php echo $nom;?>" required="required" placeholder="Enter Name">
+                                                    <label>Name<span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="name" required="required" placeholder="Enter Module Name">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-group local-forms">
                                                     <label>Niveau <span class="login-danger">*</span></label>
-                                                    <input class="form-control" type="text" name="niveau" value="<?php echo $niv;?>" required="required" placeholder="Enter level">
+                                                    <input class="form-control" name="niveau" type="text" required="required" placeholder="Enter Module Description">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-group local-forms">
                                                     <label>Semestre <span class="login-danger">*</span></label>
-                                                    <input class="form-control" type="text" name="semestre" value="<?php echo $sem;?>" required="required" placeholder="Enter semestre">
+                                                    <input class="form-control" name="semestre" type="text" required="required" placeholder="Enter Module Description">
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                           <div class="col-12">
                                                 <div class="student-submit">
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
+                                    <?php 
+                            if(isset($_SESSION['message']))  {
+                                foreach ($_SESSION['message'] as $message){
+                                    if($message=="1"){
+                                 ?>
+                                    <div id="toast-container" class="toast-container toast-top-right">
+                                        <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                            <button type="button" class="toast-close-button" role="button">×</button>
+                                            <div class="toast-title">Success!</div>
+                                            <div class="toast-message">Module Added Successfully</div>
+                                        </div>
+                                    </div>
+                    <?php  unset($_SESSION['message']);
+                            }
+                            else{
+                    ?>
+                            <div id="toast-container" class="toast-container toast-top-right">
+                                <div class="toast toast-error" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                    <button type="button" class="toast-close-button" role="button">×</button>
+                                    <div class="toast-title">Error!</div>
+                                    <div class="toast-message">Error while Adding the module</div>
+                                </div>
+                            </div>
+                    <?php
+                         unset($_SESSION['message']);}
+                    }}
+                    ?>
                                 </div>
                             </div>
                         </div>
@@ -108,6 +130,8 @@ if (isset($_SESSION['user_data'])) {
         <script src="/ENSAHify/public/assets/plugins/apexchart/apexcharts.min.js"></script>
         <script src="/ENSAHify/public/assets/plugins/apexchart/chart-dat.js"></script>
         <script src="/ENSAHify/public/assets/js/calander.js"></script>
+        <script src="/ENSAHify/public/assets/plugins/toastr/toastr.min.js"></script>
+        <script src="/ENSAHify/public/assets/plugins/toastr/toastr.js"></script>
         <script src="/ENSAHify/public/assets/plugins/script.js"></script>
 
     </body>
