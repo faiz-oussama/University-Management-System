@@ -1,5 +1,5 @@
 <?php
-session_start();
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
     ?>
@@ -37,7 +37,6 @@ if (isset($_SESSION['user_data'])) {
         <script src="/ENSAHify/public/assets/js/calander.js"></script>
         <script src="/ENSAHify/public/assets/js/circle-progress.min.js"></script>
         <script src="/ENSAHify/public/assets/plugins/script.js"></script>
-
     </body>
 <?php 
     } else {
@@ -45,6 +44,6 @@ if (isset($_SESSION['user_data'])) {
         exit();
     }
 } else {
-    header("Location: index.php?error=UnAuthorized Access");
+    header("Location: /ENSAHify/index.php?error=1UnAuthorized Access");
 }
-?>
+?> 

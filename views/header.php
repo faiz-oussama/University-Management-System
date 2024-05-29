@@ -1,3 +1,7 @@
+<?php 
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php'); 
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +91,7 @@
                         <img class="rounded-circle" src="/ENSAHify/public/assets/img/profiles/avatar-01.jpg" width="31">
                         <div class="user-text">
                             <h6><?php echo ucfirst($_SESSION['user_data']['nom']) . " " . ucfirst($_SESSION['user_data']['prénom']) ?></h6>
-                            <p class="text-muted mb-0"><?php echo $_SESSION['user_data']['role_name'] ?></p>
+                            <p class="text-muted mb-0"><?php echo $_SESSION['role_name'] ?></p>
                         </div>
                     </span>
                 </a>
@@ -99,7 +103,7 @@
                         </div>
                         <div class="user-text">
                             <h6><?php echo ucfirst($_SESSION['user_data']['nom']) . " " . ucfirst($_SESSION['user_data']['prénom']) ?></h6>
-                            <p class="text-muted mb-0"><?php echo $_SESSION['user_data']['role_name'] ?></p>
+                            <p class="text-muted mb-0"><?php echo $_SESSION['role_name'] ?></p>
                         </div>
                     </div>
                     <a class="dropdown-item" href="profile.html">My Profile</a>

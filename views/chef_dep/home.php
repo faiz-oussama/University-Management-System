@@ -1,4 +1,5 @@
 <?php
+include('/ENSAHify/views/auth/session.php');
 session_start();
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
@@ -37,6 +38,11 @@ if (isset($_SESSION['user_data'])) {
         <script src="/ENSAHify/public/assets/js/calander.js"></script>
         <script src="/ENSAHify/public/assets/js/circle-progress.min.js"></script>
         <script src="/ENSAHify/public/assets/plugins/script.js"></script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
 
     </body>
 <?php 

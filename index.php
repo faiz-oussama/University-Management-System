@@ -1,9 +1,11 @@
 <?php
-session_start();
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
+<script type="text/javascript"> window.history.forward();</script>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -24,9 +26,9 @@ session_start();
         <div class="login-wrapper">
             <div class="container">
                 
-                <div class="loginbox">
+                <div class="loginbox" style="height: 550px;">
                     <div class="login-left">
-                        <img class="img-fluid" src="public/assets/img/login.jpg" alt="Logo">
+                        <img class="img-fluid" style="height: 550px;" src="public/assets/img/login.jpg" alt="Logo">
                     </div>
                     <div class="login-right">
                         <div class="login-right-wrap">
@@ -58,8 +60,9 @@ session_start();
                                 </div>
                                 <div class="forgotpass">
                                     <div class="remember-me">
-                                        <label class="custom_check mr-2 mb-0 d-inline-flex remember-me"> Remember me
-                                            <input type="checkbox" name="remember">
+                                        <label class="custom_check mr-2 mb-0 d-inline-flex remember-me">
+                                            Remember me
+                                            <input type="checkbox" name="remember" value="checked">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
