@@ -24,6 +24,7 @@ if(isset($_REQUEST['email']) && !empty($_REQUEST['email']) && isset($_REQUEST['p
         $_SESSION['user_id'] = $user_id;
         $_SESSION['niveau'] = $niveau;
         $_SESSION['cne'] = $cne;
+        $_SESSION['role_name'] =  $data['role_name'];
         if($data['role'] == 2)
         {
             header("Location:../../views/coordinateur/home.php");
