@@ -1,6 +1,6 @@
 <?php
-include('/ENSAHify/views/auth/session.php');
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
     ?>

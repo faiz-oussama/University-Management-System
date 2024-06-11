@@ -5,7 +5,8 @@ if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
 
         $data = array();
-        $qr = mysqli_query($conn,"select * from users where role ='4'");
+        $niveau = $_GET['level'];
+        $qr = mysqli_query($conn,"select * from users where role ='4' and niveau = $niveau");
         while($row = mysqli_fetch_assoc($qr)){
             array_push($data,$row);
         }

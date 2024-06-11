@@ -27,10 +27,10 @@ include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
     <div class="header">
         <div class="header-left">
             <a href="#" class="logo">
-                <img src="/ENSAHify/public/assets/img/logoe.png" alt="Logo" style="margin-right: 100px; ">
+                <img src="/ENSAHify/public/assets/img/logo.png" alt="Logo" style="margin-left: 90px;transform:scale(2.6) ">
             </a>
             <a href="index.html" class="logo logo-small">
-                <img src="/ENSAHify/public/assets/img/logoe.png" alt="Logo" style="margin-right: 16px; ">
+                <img src="/ENSAHify/public/assets/img/logo.png" alt="Logo" style="transform:scale(2.6) ">
             </a>
         </div>
         <div class="menu-toggle">

@@ -9,14 +9,14 @@ if (isset($_SESSION['user_data'])) {
         }
         if ($qr) {
             $_SESSION['message'][] = "2";
-            header("Location:/ENSAHify/views/coordinateur/affectation-module/deleteAffectation.php");
+            header("Location:/ENSAHify/views/coordinateur/affectation-module/AfficheAffectation.php");
         } else {
             $_SESSION['message'][] = "3";
-            header("Location:/ENSAHify/views/coordinateur/affectation-module/deleteAffectation.php");
+            header("Location:/ENSAHify/views/coordinateur/affectation-module/AfficheAffectation.php");
         }
     ?>
 
-
+        
 <?php 
     } else {
         header("Location: /ENSAHify/error.php");

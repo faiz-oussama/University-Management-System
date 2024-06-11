@@ -25,7 +25,7 @@
                         <li><a href="/ENSAHify/views/chef_dep/module-management/view_module.php">Modules List</a></li>
                         <li><a href="/ENSAHify/views/chef_dep/module-management/add_module.php">Module Add</a></li>
                         <li><a href="/ENSAHify/views/chef_dep/module-management/edit_module.php">Module Edit</a></li>
-                    </ul>
+                    </ul> 
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-address-card"></i><span> Profile</span></a>

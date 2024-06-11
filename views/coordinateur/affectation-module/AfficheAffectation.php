@@ -14,7 +14,6 @@ if (isset($_SESSION['user_data'])) {
             array_push($data,$row);
         }
     ?>
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -73,13 +72,13 @@ if (isset($_SESSION['user_data'])) {
                                     </div>
                                 <?php unset($_SESSION['message']);
                                     }
-                                    else{
+                                    else if ($message=="1"){
                                     ?>
                                         <div id="toast-container" class="toast-container toast-top-right">
-                                            <div class="toast toast-error" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                            <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
                                                 <button type="button" class="toast-close-button" role="button">×</button>
-                                                <div class="toast-title">Error!</div>
-                                                <div class="toast-message">Error while deleting the assignement</div>
+                                                <div class="toast-title">Success!</div>
+                                                <div class="toast-message">Assignemenet added Successfully</div>
                                             </div>
                                         </div>
                                     <?php
@@ -87,30 +86,11 @@ if (isset($_SESSION['user_data'])) {
                                         }}
                                 ?>
                     </div>
-                    <div class="student-group-form">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search by ID ...">
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search by Name ...">
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="search-student-btn">
-                                    <button type="btn" class="btn btn-primary">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-table comman-shadow">
                                 <div class="card-body">
-
                                     <div class="page-header">
                                         <div class="row align-items-center">
                                             <div class="col">
@@ -118,7 +98,7 @@ if (isset($_SESSION['user_data'])) {
                                             </div>
                                             <div class="col-auto text-end float-end ms-auto download-grp">
                                                 <a href="/ENSAHify/controllers/DownloadCsv.php" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                                <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                                <a href="/ENSAHify/views/coordinateur/affectation-module/affectation.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -152,6 +132,9 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['TName'] ?></td>
                                                     <td class="text-end">
                                                     <div class="actions ">
+                                                        <a href="/ENSAHify/views/coordinateur/affectation-module/affectation.php?type=edit&updateid=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
                                                         <a href="/ENSAHify/controllers/DeleteAffectationController.php?updateid=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
                                                             <i class="fa fa-trash"></i>
                                                         </a>

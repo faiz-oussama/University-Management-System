@@ -1,27 +1,39 @@
 <?php
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
+
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
-        $module = mysqli_real_escape_string($conn,$_REQUEST['Modulename']);
-        $teacher = mysqli_real_escape_string($conn,$_REQUEST['teacherName']);
+        $module = mysqli_real_escape_string($conn, $_POST['Modulename']);
+        $teacher = mysqli_real_escape_string($conn, $_POST['teacherName']);
+        $id = isset($_POST['edit_id']) ? mysqli_real_escape_string($conn, $_POST['edit_id']) : null;
 
-        $qr = mysqli_query($conn,"INSERT into affectationmoduleprof (
-            id_teacher,id_module) values (
-            '".$teacher."','".$module."')");
-            if ($qr) {
+        if ($id) {
+            $query = "UPDATE affectationmoduleprof SET id_module = '$module', id_teacher = '$teacher' WHERE id = '$id'";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
                 $_SESSION['message'][] = "1";
-                header("Location:/ENSAHify/views/coordinateur/affectation-module/affectation.php");
             } else {
                 $_SESSION['message'][] = "0";
-                header("Location:/ENSAHify/views/coordinateur/affectation-module/affectation.php");
             }
-?>
-<?php } else {
-        header("Location: /ENSAHify/error.php");
-    }
-}else {
-    header("Location: index.php?error=UnAuthorized Access");
-}
+        } else {
+            $query = "INSERT INTO affectationmoduleprof (id_teacher, id_module) VALUES ('$teacher', '$module')";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                $_SESSION['message'][] = "1";
+            } else {
+                $_SESSION['message'][] = "0";
+            }
+        }
 
+        header("Location: /ENSAHify/views/coordinateur/affectation-module/AfficheAffectation.php");
+        exit();
+    } else {
+        header("Location: /ENSAHify/error.php");
+        exit();
+    }
+} else {
+    header("Location: /ENSAHify/index.php?error=UnAuthorized Access");
+    exit();
+}
 ?>

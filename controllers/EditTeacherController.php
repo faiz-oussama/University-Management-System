@@ -116,7 +116,7 @@ if (isset($_SESSION['user_data'])) {
             </div>
             <?php
             include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/header.php');
-            include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/coordinateur/sidebar.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/chef_dep/sidebar.php');
             ?>
         <script src="/ENSAHify/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/ENSAHify/public/assets/js/jquery-3.6.0.min.js"></script>

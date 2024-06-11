@@ -1,5 +1,4 @@
 <?php
-session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
 

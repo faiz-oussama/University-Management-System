@@ -9,51 +9,23 @@
                 <li>
                     <a href="/ENSAHify/views/coordinateur/home.php"><i class="fas fa-home"></i><span> Home</span></a>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-graduation-cap"></i> <span> Students</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="/ENSAHify/views/coordinateur/student-management/view_student.php">Student List</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/student-management/add_student.php">Student Add</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/student-management/edit_student.php">Student Edit</a></li>
-                    </ul>
+                <li>
+                    <a href="/ENSAHify/views/coordinateur/student-management/choixNiveau.php"><i class="fas fa-graduation-cap"></i><span> Students</span></a>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="/ENSAHify/views/coordinateur/teacher-management/view_teacher.php">Teacher List</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/teacher-management/add_teacher.php">Teacher Add</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/teacher-management/edit_teacher.php">Teacher Edit</a></li>
-                    </ul>
+                <li>
+                    <a href="/ENSAHify/views/coordinateur/teacher-management/view_teacher.php"><i class="fas fa-chalkboard-teacher"></i><span> Teachers</span></a>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-book-reader"></i> <span> Modules</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="/ENSAHify/views/coordinateur/module-management/view_module.php">Modules List</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/module-management/add_module.php">Module Add</a></li>
-                        <li><a href="/ENSAHify/views/coordinateur/module-management/edit_module.php">Module Edit</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                <a href="#"><i class="fas fa-tasks"></i> <span> Assign Module </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li>
-                            <a href="/ENSAHify/views/coordinateur/affectation-module/affectation.php">Add Assignement</a>
-                        </li>
-                        <li><a href="/ENSAHify/views/coordinateur/affectation-module/deleteAffectation.php">Delete Assignement</a></li>
-                        
-                    </ul>
+                <li>
+                    <a href="/ENSAHify/views/coordinateur/affectation-module/AfficheAffectation.php"><i class="fas fa-tasks"></i><span> Assign Module</span></a>
                 </li>
                 
                 <li class="submenu">
                     <a href="#"><i class="fas fa-clipboard"></i> <span> Grades</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="/ENSAHify/views/coordinateur/notes/firstpage.php">Grades list</a></li>
-                        <li><a href="#"><i class="fa fa-archive"></i><span>Grades archive</span></a></li>
+                        <li><a href="/ENSAHify/views/coordinateur/notes/firstpage.php"><i class="fa fa-list"></i><span> Grades list</span></a></li>
+                        <li><a href="#"><i class="fa fa-archive"></i><span> Grades archive</span></a></li>
+                        <li><a href="/ENSAHify/views/coordinateur/notes/selectionnerNiveauNotes.php"><i class="fa fa-file-export"></i><span> Export Grades</span></a></li>
                     </ul>
                 </li>
                 <li>

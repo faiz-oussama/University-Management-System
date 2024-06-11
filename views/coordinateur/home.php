@@ -1,5 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 2) {
     ?>

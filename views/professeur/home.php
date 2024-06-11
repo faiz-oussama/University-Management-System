@@ -1,6 +1,5 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
-session_start();
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 3) {
      ?>

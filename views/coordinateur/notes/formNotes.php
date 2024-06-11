@@ -49,9 +49,9 @@ if (isset($_SESSION['user_data'])) {
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-sub-header">
-                                <h3 class="page-title">Professor</h3>
+                                <h3 class="page-title">Coordinator</h3>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="students.html">Professor</a></li>
+                                    <li class="breadcrumb-item"><a href="students.html">Coordinator</a></li>
                                     <li class="breadcrumb-item active">All Grades</li>
                                 </ul>
                             </div>
@@ -91,12 +91,12 @@ if (isset($_SESSION['user_data'])) {
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="myInputCNE" onkeyup="myFunction()" placeholder="Search by CNE...">
+                                    <input type="text" class="form-control" id="myInputName" onkeyup="myFunction()" placeholder="Search by Name ...">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="myInputName" onkeyup="myFunction()" placeholder="Search by Name ...">
+                                    <input type="text" class="form-control" id="myInputCNE" onkeyup="myFunction()" placeholder="Search by CNE...">
                                 </div>
                             </div>
                         </div>
