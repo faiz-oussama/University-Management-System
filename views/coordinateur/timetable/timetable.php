@@ -7,7 +7,14 @@ if (isset($_SESSION['user_data'])) {
         $semestre = mysqli_real_escape_string($conn, $_GET['semestre']);
         $fil_nom = mysqli_real_escape_string($conn, $_SESSION['fil_nom']);
         $events = [];
-
+        $id =  $_SESSION['user_id'];
+        $qr = mysqli_query($conn,"SELECT m.* FROM module m 
+            JOIN users u ON m.nom_filiere = u.nom_filiere WHERE u.id =".$id."
+            and m.niveau = ".$level." and m.semestre = ".$semestre."");
+        $data = [];
+        while($row = mysqli_fetch_assoc($qr)){
+            array_push($data,$row);
+        }
         $query = "SELECT * FROM timetable_events WHERE level = ? AND semestre = ? AND section = ?";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, 'iis', $level, $semestre, $fil_nom);
@@ -81,7 +88,6 @@ if (isset($_SESSION['user_data'])) {
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card ">
@@ -91,22 +97,25 @@ if (isset($_SESSION['user_data'])) {
                         </div>
                     </div>
                 </div>
-
-                <div class="modal fade none-border" id="my_event">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add Event</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-success save-event submit-btn">Create event</button>
-                                <button type="button" class="btn btn-danger delete-event submit-btn" data-dismiss="modal">Delete</button>
+                <!-- Delete Event Modal -->
+                    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eventModalLabel">Delete Event</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <input type="hidden" id="eventId" name="id">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="deleteEventButton">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
                 <?php
                     include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/header.php');
                     include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/coordinateur/sidebar.php');
@@ -156,6 +165,11 @@ if (isset($_SESSION['user_data'])) {
             viewRender: renderViewColumns,
             eventDrop: updateEvent,
             eventResize: updateEvent,
+            eventClick: function(event) {
+                $('#eventId').val(event.id);
+                $('#eventModal').modal('show');
+            },
+            
             eventAllow: function(dropLocation, draggedEvent) {
                 console.log('Event allowed:', dropLocation, draggedEvent);
                 return moment(dropLocation.start).day() !== 0 && moment(dropLocation.end).day() !== 0;
@@ -199,6 +213,24 @@ if (isset($_SESSION['user_data'])) {
                 }
             });
         }
+        $('#deleteEventButton').click(function(event) {
+            var id = $('#eventId').val();
+            console.log(id);
+            $.ajax({
+                url: "/ENSAHify/controllers/deleteEvent.php",
+                type: "POST",
+                data: {id: id},
+                success: function() {
+                    $('#calendar').fullCalendar('removeEvents', id);
+                    $('#eventModal').modal('hide');
+                    alert("Event Deleted Successfully");
+                },
+                error: function(xhr, status, error) {
+                    console.error("Failed to delete event:", error);
+                }
+            });
+        });
+
     });
     </script>
 </body>

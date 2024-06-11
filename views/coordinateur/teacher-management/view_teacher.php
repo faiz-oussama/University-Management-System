@@ -144,8 +144,8 @@ if (isset($_SESSION['user_data'])) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                    foreach($data as $d){
+                                            <?php
+                                                foreach($data as $d){
                                                 ?>
                                                 <tr>
                                                     <td>
@@ -156,8 +156,10 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['id'] ?></td>
                                                     <td>
                                                         <h2 class="table-avatar">
-                                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="/ENSAHify/public/assets/img/profiles/avatar-01.jpg" alt="User Image"></a>
-                                                            <a href="student-details.html"><?php echo ucfirst($d['nom'])." ".ucfirst($d['prénom']) ?></a>
+                                                            <a href="#" class="avatar avatar-sm me-2">
+                                                                <img class="avatar-img rounded-circle" src="https://ui-avatars.com/api/?name=<?php echo urlencode(ucfirst($d['nom'])." ".ucfirst($d['prénom'])); ?>" alt="User Image">
+                                                            </a>
+                                                            <a href="#"><?php echo ucfirst($d['nom'])." ".ucfirst($d['prénom']) ?></a>
                                                         </h2>
                                                     </td>
                                                     <td><?php echo $d['CNI'] ?></td>
