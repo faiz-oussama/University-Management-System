@@ -6,31 +6,29 @@ if (isset($_SESSION['user_data'])) {
         if(isset($_GET['id'])){
             $id = $_GET['id'];
             $name = mysqli_real_escape_string($conn,$_REQUEST['name']);
-            $nom_filiere = $_SESSION['fil_nom'];
             $id_dep = $_SESSION['dep_id'];
             $niveau = mysqli_real_escape_string($conn,$_REQUEST['niveau']);
             $semestre = mysqli_real_escape_string($conn,$_REQUEST['semestre']);
-
+            $filiere = mysqli_real_escape_string($conn,$_REQUEST['filiere']);
             $qr = mysqli_query($conn,"UPDATE module set
-                name = '$name',niveau = '$niveau',semestre = '$semestre' where id='$id'");
+                name = '$name', nom_filiere ='$filiere',niveau = '$niveau',semestre = '$semestre' where id='$id'");
                 if ($qr) {
                     $_SESSION['message']= "1";
                     header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");
                 } else {
                     $_SESSION['message'] = "0";
                     header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");
-                }
+                }   
             }
         else{
-        $nom_filiere = $_SESSION['fil_nom'];
         $id_dep = $_SESSION['dep_id'];
         $name = mysqli_real_escape_string($conn,$_REQUEST['name']);
         $niveau = mysqli_real_escape_string($conn,$_REQUEST['niveau']);
         $semestre = mysqli_real_escape_string($conn,$_REQUEST['semestre']);
-
+        $filiere = mysqli_real_escape_string($conn,$_REQUEST['filiere']);
         $qr = mysqli_query($conn,"INSERT into module (
            name,nom_filiere,niveau,semestre,id_dep) values (
-            '".$name."','".$nom_filiere."','".$niveau."','".$semestre."','".$id_dep."')");
+            '".$name."','".$filiere."','".$niveau."','".$semestre."','".$id_dep."')");
             if ($qr) {
                 $_SESSION['message'] = "1";
                 header("Location:/ENSAHify/views/chef_dep/module-management/view_module.php");

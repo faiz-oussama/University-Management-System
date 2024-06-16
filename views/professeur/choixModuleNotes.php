@@ -2,7 +2,7 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 3) {
+    if ($_SESSION['user_data']['role'] == 3 || $_SESSION['user_data']['role'] == 2  || $_SESSION['user_data']['role'] == 1) {
         $id = $_SESSION['user_id'];
         $qr = mysqli_query($conn,"SELECT a.* ,m.name as mname
             FROM affectationmoduleprof a

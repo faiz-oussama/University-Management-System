@@ -32,7 +32,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
                     </div>
                     <div class="login-right">
                         <div class="login-right-wrap">
-                            <h1>Welcome to ENSAHify</h1>
+                            <h1>Welcome to ENSAH Grades</h1>
                             <p class="account-subtitle">Need an account? <a href="register.html">Sign Up</a></p>
                             <h2>Sign in</h2>
                             
@@ -73,17 +73,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/views/auth/session.php');
                                 </div>
                             </form>
 
-                            <div class="login-or">
-                                <span class="or-line"></span>
-                                <span class="span-or">or</span>
-                            </div>
 
-                            <div class="social-login">
-                                <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
 
                         </div>
                     </div>

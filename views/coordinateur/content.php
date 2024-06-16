@@ -155,6 +155,9 @@
                     
                 </div>
             </div>
-                
-    </div>
+            <footer>
+                <p>Copyright © 2024 FAIZ Oussama.</p>
+            </footer>     
+        </div>
+    
 </div>

@@ -3,9 +3,9 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
-        if(isset($_GET['updateid'])){
+        if(isset($_GET['id'])){
             $id_dep = $_SESSION['dep_id'];
-            $id = $_GET['updateid'];
+            $id = $_GET['id'];
             $qr = mysqli_query($conn,"SELECT * from users where id ='$id'");
             $data = mysqli_fetch_assoc($qr);
 

@@ -38,7 +38,7 @@ if (isset($_SESSION['user_data'])) {
                                 <div class="page-sub-header">
                                     <h3 class="page-title">Add Teachers</h3>
                                         <ul class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="students.html">Coordinator</a></li>
+                                            <li class="breadcrumb-item"><a href="students.html">Head of departement</a></li>
                                             <li class="breadcrumb-item active">Add Teachers</li>
                                         </ul>
                                 </div>
@@ -117,7 +117,7 @@ if (isset($_SESSION['user_data'])) {
                                     <?php 
                             if(isset($_SESSION['message']))  {
                                 foreach ($_SESSION['message'] as $message){
-                                    if($message=="1"){
+                                    if($message=="1" || $message=="2"){
                                  ?>
                                     <div id="toast-container" class="toast-container toast-top-right">
                                         <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">

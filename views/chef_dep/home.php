@@ -29,15 +29,18 @@ if (isset($_SESSION['user_data'])) {
             ?>
         <script src="/ENSAHify/public/assets/js/jquery-3.6.0.min.js"></script>
         <script src="/ENSAHify/public/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="/ENSAHify/public/assets/js/script.js"></script>
         <script src="/ENSAHify/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/ENSAHify/public/assets/js/feather.min.js"></script>
+        <script src="/ENSAHify/public/assets/js/circle-progress.min.js"></script>   
+        <script src="/ENSAHify/public/assets/plugins/apexchart/student-chart.js"></script>
         <script src="/ENSAHify/public/assets/plugins/apexchart/apexcharts.min.js"></script>
-        <script src="/ENSAHify/public/assets/plugins/apexchart/chart-dat.js"></script>
+        <script src="/ENSAHify/public/assets/plugins/apexchart/student-chart.js"></script>
         <script src="/ENSAHify/public/assets/plugins/simple-calendar/jquery.simple-calendar.js"></script>
         <script src="/ENSAHify/public/assets/js/calander.js"></script>
-        <script src="/ENSAHify/public/assets/js/circle-progress.min.js"></script>
+        <script src="/ENSAHify/public/assets/js/circle-progress.min.js"></script> 
+        <script src="/ENSAHify/public/assets/js/script.js"></script>    
         <script src="/ENSAHify/public/assets/plugins/script.js"></script>
+
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
@@ -51,6 +54,6 @@ if (isset($_SESSION['user_data'])) {
         exit();
     }
 } else {
-    header("Location: index.php?error=UnAuthorized Access");
+    header("Location: /ENSAHify/index.php?error=UnAuthorized Access");
 }
 ?>

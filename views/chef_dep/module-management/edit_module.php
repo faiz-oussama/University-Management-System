@@ -156,7 +156,7 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['depName'] ?></td> 
                                                     <td class="text-end">
                                                     <div class="actions ">
-                                                        <a href="/ENSAHify/controllers/EditModuleController.php?updateid=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                        <a href="/ENSAHify/controllers/AddModuleController.php?updateid=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
                                                             <i class="feather-edit"></i>
                                                         </a>
                                                     </div>

@@ -50,7 +50,7 @@ if (isset($_SESSION['user_data'])) {
                                 <div class="page-sub-header">
                                     <h3 class="page-title">Teachers</h3>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="students.html">Coordinator</a></li>
+                                        <li class="breadcrumb-item"><a href="students.html">Head of departement</a></li>
                                         <li class="breadcrumb-item active">All Teachers</li>
                                     </ul>
                                 </div>
@@ -61,7 +61,7 @@ if (isset($_SESSION['user_data'])) {
                     <?php 
                             if(isset($_SESSION['message']))  {
                                 foreach ($_SESSION['message'] as $message){
-                                    if($message=="2"){
+                                    if($message=="2" || $message =="1"){
                                  ?>
                                     <div id="toast-container" class="toast-container toast-top-right">
                                         <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
@@ -122,7 +122,7 @@ if (isset($_SESSION['user_data'])) {
                                             </div>
                                             <div class="col-auto text-end float-end ms-auto download-grp">
                                                 <a href="/ENSAHify/controllers/DownloadCsv.php" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                                <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                                <a href="/ENSAHify/views/chef_dep/teacher-management/add_teacher.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -141,6 +141,7 @@ if (isset($_SESSION['user_data'])) {
                                                     <th>Departement</th>
                                                     <th>Mobile Number</th>
                                                     <th>Email</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -163,7 +164,17 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['CNI'] ?></td>
                                                     <td><?php echo $d['department_name'] ?></td>
                                                     <td><?php echo $d['phone'] ?></td> 
-                                                    <td><?php echo $d['email'] ?></td>          
+                                                    <td><?php echo $d['email'] ?></td>  
+                                                    <td class="text-end">
+                                                        <div class="actions ">
+                                                            <a href="/ENSAHify/controllers/EditTeacherController.php?id=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a href="/ENSAHify/controllers/deleteTeacher.php?id=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>    
                                                 </tr>
                                                 <?php } ?>   
                                             </tbody>

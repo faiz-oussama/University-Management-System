@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Welcome <?php echo ucfirst($_SESSION['user_data']['prénom']); ?></h3>
+                            <h3 class="page-title">Welcome Mr. <?php echo ucfirst($_SESSION['user_data']['prénom']); ?></h3>
 
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -314,5 +314,7 @@
 </div>
 </div>
 </div>
-
+<footer>
+                <p>Copyright © 2024 FAIZ Oussama.</p>
+            </footer> 
 </div>

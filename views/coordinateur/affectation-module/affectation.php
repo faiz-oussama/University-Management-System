@@ -20,7 +20,7 @@ if (isset($_SESSION['user_data'])) {
             $teacher_id = $edit_data['id_teacher'];
         }
 
-        $qr = mysqli_query($conn,"SELECT * FROM users WHERE (role = 3 and id_dep ='$dep')");
+        $qr = mysqli_query($conn,"SELECT * FROM users WHERE (role = 3 or role = 2 or role = 1 and id_dep ='$dep')");
         $qr2 = mysqli_query($conn,"SELECT id,name FROM module WHERE nom_filiere ='$fil_nom'");
     ?>
     <!DOCTYPE html>

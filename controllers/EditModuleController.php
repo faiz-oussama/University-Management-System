@@ -3,16 +3,22 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
-        if(isset($_GET['updateid'])){
-            $id = $_GET['updateid'];
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $id_dep = $_SESSION['dep_id'];
             $qr = mysqli_query($conn,"SELECT * from module where id ='$id'");
-            $data = mysqli_fetch_assoc($qr);
-
+            $data2 = mysqli_fetch_assoc($qr);
+            $data = array();
+            $qr2 = mysqli_query($conn,"SELECT distinct users.id_dep, filiere.nom_complet, filiere.id_dep,filiere.name
+            from filiere
+            INNER JOIN users on users.id_dep = filiere.id_dep
+            WHERE users.id_dep= $id_dep;
+            ");
             //get data
 
-            $nom = $data['name'];
-            $niv = $data['niveau'];
-            $sem = $data['semestre'];
+            $nom = $data2['name'];
+            $niv = $data2['niveau'];
+            $sem = $data2['semestre'];
         }
     ?>
  
@@ -64,6 +70,18 @@ if (isset($_SESSION['user_data'])) {
                                                 <div class="form-group local-forms">
                                                     <label>Name <span class="login-danger">*</span></label>
                                                     <input class="form-control" type="text" name="name" value="<?php echo $nom;?>" required="required" placeholder="Enter Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-group local-forms">
+                                                        <label>Filiere<span class="login-danger">*</span></label>
+                                                        <select class="form-control select" name="filiere">
+                                                            <option>Select Filiere</option>
+                                                            <?php while($filiere =  mysqli_fetch_assoc($qr2)): ?>
+                                                                <option value="<?php echo $filiere['name']; ?>"><?php echo $filiere['nom_complet']; ?></option>
+                                                            <?php endwhile; ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4">

@@ -74,13 +74,13 @@ if (isset($_SESSION['user_data'])) {
                                     </div>
                                 <?php
                                     }
-                                    else{
+                                    else if($message = 2){
                                     ?>
                                         <div id="toast-container" class="toast-container toast-top-right">
-                                            <div class="toast toast-error" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
+                                            <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
                                                 <button type="button" class="toast-close-button" role="button">×</button>
-                                                <div class="toast-title">Error!</div>
-                                                <div class="toast-message">Error while Adding the module</div>
+                                                <div class="toast-title">Success</div>
+                                                <div class="toast-message">Module deleted Successfully</div>
                                             </div>
                                         </div>
                                     <?php
@@ -98,11 +98,6 @@ if (isset($_SESSION['user_data'])) {
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Search by Name ...">
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search by Phone ...">
                                 </div>
                             </div>
                             <div class="col-lg-2">
@@ -124,7 +119,7 @@ if (isset($_SESSION['user_data'])) {
                                             </div>
                                             <div class="col-auto text-end float-end ms-auto download-grp">
                                                 <a href="/ENSAHify/controllers/DownloadCsv.php" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                                <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                                <a href="/ENSAHify/views/chef_dep/module-management/add_module.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -143,6 +138,7 @@ if (isset($_SESSION['user_data'])) {
                                                     <th>Niveau</th>
                                                     <th>Semestre</th>
                                                     <th>Departement</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -160,7 +156,17 @@ if (isset($_SESSION['user_data'])) {
                                                     <td><?php echo $d['filName'] ?></td>
                                                     <td><?php echo $d['niveau'] ?></td>
                                                     <td><?php echo $d['semestre'] ?></td>
-                                                    <td><?php echo $d['depName'] ?></td>     
+                                                    <td><?php echo $d['depName'] ?></td> 
+                                                    <td class="text-end">
+                                                        <div class="actions ">
+                                                            <a href="/ENSAHify/controllers/EditModuleController.php?id=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a href="/ENSAHify/controllers/deleteModule.php?id=<?php echo $d['id']; ?>" class="btn btn-sm bg-danger-light">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>        
                                                 </tr>
                                                 <?php } ?>   
                                             </tbody>

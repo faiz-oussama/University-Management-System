@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 3) {
+    if ($_SESSION['user_data']['role'] == 3 || $_SESSION['user_data']['role'] == 2  || $_SESSION['user_data']['role'] == 1) {
      ?>
 
     <!DOCTYPE html>

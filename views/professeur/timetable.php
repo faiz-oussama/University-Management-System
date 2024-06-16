@@ -2,7 +2,7 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 3) {
+    if ($_SESSION['user_data']['role'] == 3 || $_SESSION['user_data']['role'] == 2  || $_SESSION['user_data']['role'] == 1) {
         $id =  $_SESSION['user_id'];
         $events = [];
         $query = "SELECT * FROM timetable_events WHERE teacher_id = ?";

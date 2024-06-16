@@ -40,10 +40,10 @@ if (isset($_SESSION['user_data'])) {
             '".$prénom."','".$nom."','".$genre."','".$sqlDateOfBirth."','".$email."','".$cni."','".md5($cni)."',".$role.",'".$phone."','".$dep."','".date('Y-m-d H:i:s')."')");
             if ($qr) {
                 $_SESSION['message'][] = "1";
-                header("Location:/ENSAHify/views/chef_dep/teacher-management/add_teacher.php");
+                header("Location:/ENSAHify/views/chef_dep/teacher-management/view_teacher.php");
             } else {
                 $_SESSION['message'][] = "0";
-                header("Location: /ENSAHify/views/chef_dep/teacher-management/add_teacher.php");
+                header("Location: /ENSAHify/views/chef_dep/teacher-management/view_teacher.php");
             }
         }
 ?>

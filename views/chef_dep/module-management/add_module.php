@@ -1,9 +1,17 @@
 <?php
 session_start();
+include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 if (isset($_SESSION['user_data'])) {
     if ($_SESSION['user_data']['role'] == 1) {
+        $id_dep = $_SESSION['dep_id'];
+        $data = array();
+        $qr = mysqli_query($conn,"SELECT distinct users.id_dep, filiere.nom_complet, filiere.id_dep,filiere.name
+        from filiere
+        INNER JOIN users on users.id_dep = filiere.id_dep
+        WHERE users.id_dep= $id_dep;
+        ");
     ?>
- 
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -59,6 +67,17 @@ if (isset($_SESSION['user_data'])) {
                                                 <div class="form-group local-forms">
                                                     <label>Name<span class="login-danger">*</span></label>
                                                     <input class="form-control" type="text" name="name" required="required" placeholder="Enter Module Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                            <div class="form-group local-forms">
+                                                    <label>Filiere<span class="login-danger">*</span></label>
+                                                    <select class="form-control select" name="filiere">
+                                                        <option>Select Filiere</option>
+                                                        <?php while($filiere =  mysqli_fetch_assoc($qr)): ?>
+                                                            <option value="<?php echo $filiere['name']; ?>"><?php echo $filiere['nom_complet']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4">

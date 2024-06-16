@@ -31,9 +31,27 @@
                 <li>
                     <a href="/ENSAHify/views/coordinateur/timetable/moduleSelectTimeTable.php"><i class="fas fa-calendar-day"></i><span> Times Table</span></a>
                 </li>
+                <?php  if ($_SESSION['user_data']['role'] == 2) { ?>
+                <li class="menu-title">
+                    <span>Profesor Menu</span>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-book-reader"></i> <span> Modules</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="/ENSAHify/views/professeur/module-view.php">Modules List</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/ENSAHify/views/professeur/choixModuleNotes.php"><i class="fas fa-clipboard"></i> <span> Grades</span></a>
+                </li>
+                <li>
+                    <a href="/ENSAHify/views/professeur/timetable.php"><i class="fas fa-calendar-day"></i> <span> Times Table</span></a>
+                </li>
                 <li>
                     <a href="#"><i class="fas fa-address-card"></i><span> Profile</span></a>
                 </li>
+                <?php }?>
             </ul>
         </div>
     </div>

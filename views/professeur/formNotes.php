@@ -3,7 +3,7 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/ENSAHify/Database.php');
 
 if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['role'] == 3) {
+    if ($_SESSION['user_data']['role'] == 3 || $_SESSION['user_data']['role'] == 2 || $_SESSION['user_data']['role'] == 1) {
         $id_module = $_GET['id'];
         $id = $_SESSION['user_id'];
         $data = array();
@@ -52,24 +52,6 @@ if (isset($_SESSION['user_data'])) {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <?php
-                    if (isset($_SESSION['message'])) {
-                        foreach ($_SESSION['message'] as $message) {
-                    ?>
-                            <div id="toast-container" class="toast-container toast-top-right">
-                                <div class="toast toast-success" aria-live="polite" style="display: block; animation: fadeOut 5s forwards;">
-                                    <button type="button" class="toast-close-button" role="button">×</button>
-                                    <div class="toast-title">Success!</div>
-                                    <div class="toast-message"><?php echo $message; ?></div>
-                                </div>
-                            </div>
-                    <?php
-                            unset($_SESSION['message']);
-                        }
-                    }
-                    ?>
-                </div>  
                 <div class="student-group-form">
                         <div class="row">
                             <div class="col-lg-3 col-md-6">

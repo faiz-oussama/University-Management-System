@@ -9,14 +9,9 @@
                 <li>
                     <a href="/ENSAHify/views/student/home.php"><i class="fas fa-home"></i><span> Home</span></a>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-graduation-cap"></i> <span> Courses</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="/ENSAHify/views/student/view_courses.php">Courses List </a></li>
-                    </ul>
+                <li>
+                    <a href="/ENSAHify/views/student/choixSemestreCours.php"><i class="fas fa-graduation-cap"></i><span> Cours</span></a>
                 </li>
-
                 <li class="submenu">
                     <a href="#"><i class="fas fa-book-reader"></i> <span> Modules</span> <span
                             class="menu-arrow"></span></a>
