@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $subject = "New Grade Notification";
             $body = "Dear Student,<br><br>Your grade for module $module has been released. Please check your student portal for more details.<br><br>Best regards,<br>ENSAH";
 
-            
             sendEmail($email, $subject, $body);
         }
         

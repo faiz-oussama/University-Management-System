@@ -12,7 +12,6 @@ if (isset($_SESSION['user_data'])) {
         while($row = mysqli_fetch_assoc($qr)){
             array_push($data,$row);
         }
-
     ?>
     
     <!DOCTYPE html>
